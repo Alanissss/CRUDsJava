@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #111111;
+}
+
+h1, h2, p, label, th, td {
+  color: white;
+}
+
+.menu {
+    margin-bottom: 20px;
+}
+
+.cadastro-form {
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+button {
+    margin-top: 10px;
+    background-color:#007bff ;
+    
+    border: white;
+}

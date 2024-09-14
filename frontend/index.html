@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRUDs Sistema de Hotel</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <div class="container mt-4">
+    <div class="mb-4 text-center">
+      <h1>CRUDs Sistema de Hotel</h1>
+    </div>
+
+    <div class="text-center mb-4">
+      <div class="btn-group" role="group" aria-label="Cadastro Menu">
+        <button type="button" class="btn btn-primary" onclick="mostrarCadastro('Hospede')">Cadastrar Hospede</button>
+        <button type="button" class="btn btn-primary" onclick="mostrarCadastro('Cargo')">Cadastrar Cargo</button>
+        <button type="button" class="btn btn-primary" onclick="mostrarCadastro('Funcionario')">Cadastrar Funcionario</button>
+        <button type="button" class="btn btn-primary" onclick="mostrarCadastro('Reserva')">Cadastrar Reserva</button>
+        <button type="button" class="btn btn-primary" onclick="mostrarCadastro('Quarto')">Cadastrar Quarto</button>
+        <button type="button" class="btn btn-primary" onclick="mostrarCadastro('Cama')">Cadastrar Cama</button>
+      </div>
+    </div>
+
+    <!-- Cadastro Hospede -->
+    <div id="cadastroHospede" class="cadastro-form d-none">
+      <h2 class="text-center">Cadastro de Hospede</h2>
+      <form id="formCadastroHospede">
+        <input type="hidden" id="idHospede" name="id" value="-1" />
+        <div class="form-group">
+          <label for="nomeHospede">Nome:</label>
+          <input type="text" class="form-control" id="nomeHospede" name="nome" />
+        </div>
+        <div class="form-group">
+          <label for="cpfHospede">CPF:</label>
+          <input type="text" class="form-control" id="cpfHospede" name="cpf" />
+        </div>
+        <button type="button" class="btn btn-success" id="enviar" onclick="cadastrarHospede()">Cadastrar</button>
+        <button type="button" class="btn btn-warning" id="editar" onclick="editarFim()" style="display: none;">Editar</button>
+      </form>
+      <table id="tabelaHospedes" class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cadastro Cargo -->
+    <div id="cadastroCargo" class="cadastro-form d-none">
+      <h2 class="text-center">Cadastro de Cargo</h2>
+      <form id="formCadastroCargo">
+        <input type="hidden" id="idCargo" name="id" value="-1" />
+        <div class="form-group">
+          <label for="nomeCargo">Nome:</label>
+          <input type="text" class="form-control" id="nomeCargo" name="nome" />
+        </div>
+        <button type="button" class="btn btn-success" id="enviarCargo" onclick="cadastrarCargo()">Cadastrar</button>
+        <button type="button" class="btn btn-warning" id="editarCargo" onclick="editarFimCargo()" style="display: none;">Editar</button>
+      </form>
+      <table id="tabelaCargos" class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cadastro Funcionario -->
+    <div id="cadastroFuncionario" class="cadastro-form d-none">
+      <h2 class="text-center">Cadastro de Funcionario</h2>
+      <form id="formCadastroFuncionario">
+        <input type="hidden" id="idFuncionario" name="id" value="-1" />
+        <div class="form-group">
+          <label for="nomeFuncionario">Nome:</label>
+          <input type="text" class="form-control" id="nomeFuncionario" name="nome" />
+        </div>
+        <div class="form-group">
+          <label for="cpfFuncionario">CPF:</label>
+          <input type="text" class="form-control" id="cpfFuncionario" name="cpf" />
+        </div>
+        <button type="button" class="btn btn-success" id="enviarFuncionario" onclick="cadastrarFuncionario()">Cadastrar</button>
+        <button type="button" class="btn btn-warning" id="editarFuncionario" onclick="editarFimFuncionario()" style="display: none;">Editar</button>
+      </form>
+      <table id="tabelaFuncionarios" class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cadastro Reserva -->
+    <div id="cadastroReserva" class="cadastro-form d-none">
+      <h2 class="text-center">Cadastro de Reserva</h2>
+      <form id="formCadastroReserva">
+        <input type="hidden" id="idReserva" name="id" value="-1" />
+        <div class="form-group">
+          <label for="nomeReserva">Nome da Reserva:</label>
+          <input type="text" class="form-control" id="nomeReserva" name="nomeReserva" />
+        </div>
+        <div class="form-group">
+          <label for="dataInicio">Data de Início:</label>
+          <input type="date" class="form-control" id="dataInicio" name="dataInicio" />
+        </div>
+        <div class="form-group">
+          <label for="dataFim">Data de Fim:</label>
+          <input type="date" class="form-control" id="dataFim" name="dataFim" />
+        </div>
+        <button type="button" class="btn btn-success" id="enviarReserva" onclick="cadastrarReserva()">Cadastrar</button>
+        <button type="button" class="btn btn-warning" id="editarReserva" onclick="editarFimReserva()" style="display: none;">Editar</button>
+      </form>
+      <table id="tabelaReservas" class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome da Reserva</th>
+            <th>Data de Início</th>
+            <th>Data de Fim</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cadastro Quarto -->
+    <div id="cadastroQuarto" class="cadastro-form d-none">
+      <h2 class="text-center">Cadastro de Quarto</h2>
+      <form id="formCadastroQuarto">
+        <input type="hidden" id="idQuarto" name="id" value="-1" />
+        <div class="form-group">
+          <label for="nomeQuarto">Descrição:</label>
+          <input type="text" class="form-control" id="nomeQuarto" name="descricao" />
+        </div>
+        <button type="button" class="btn btn-success" id="enviarQuarto" onclick="cadastrarQuarto()">Cadastrar</button>
+        <button type="button" class="btn btn-warning" id="editarQuarto" onclick="editarFimQuarto()" style="display: none;">Editar</button>
+      </form>
+      <table id="tabelaQuartos" class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cadastro Cama -->
+    <div id="cadastroCama" class="cadastro-form d-none">
+      <h2 class="text-center">Cadastro de Cama</h2>
+      <form id="formCadastroCama">
+        <input type="hidden" id="idCama" name="id" value="-1" />
+        <div class="form-group">
+          <label for="marcaCama">Marca:</label>
+          <input type="text" class="form-control" id="marcaCama" name="marca" />
+        </div>
+        <div class="form-group">
+          <label for="modeloCama">Modelo:</label>
+          <input type="text" class="form-control" id="modeloCama" name="modelo" />
+        </div>
+        <button type="button" class="btn btn-success" id="enviarCama" onclick="cadastrarCama()">Cadastrar</button>
+        <button type="button" class="btn btn-warning" id="editarCama" onclick="editarFimCama()" style="display: none;">Editar</button>
+      </form>
+      <table id="tabelaCamas" class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/frontend/js/script.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>
